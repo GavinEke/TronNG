@@ -1,8 +1,7 @@
 Start-Transcript -Path ~\TronNG.log -Append
 Write-Output "Start of TronNG - $(Get-Date)"
 
-Function Test-Administrator  
-{  
+Function Test-Administrator {  
     $AdminUserTest = [Security.Principal.WindowsIdentity]::GetCurrent();
     (New-Object Security.Principal.WindowsPrincipal $AdminUserTest).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)  
 }
