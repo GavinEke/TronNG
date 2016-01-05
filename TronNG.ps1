@@ -1,6 +1,5 @@
-Start-Transcript -Path .\TronNG.log -Append
+Start-Transcript -Path ~\TronNG.log -Append
 Write-Output "Start of TronNG - $(Get-Date)"
-Checkpoint-Computer -Description "TronNG"
 
 Function Test-Administrator  
 {  
@@ -11,6 +10,9 @@ $TestAdmin = Test-Administrator
 
 If ($TestAdmin -eq $True) { #Admin Check
     If ([Environment]::OSVersion.Version.Major -eq 10) { #Win10 Check
+        # Step 0 - Create Checkpoint
+        Checkpoint-Computer -Description "TronNG"
+
         # Step 1 - Update
         wuauclt.exe /detectnow /updatenow
 
