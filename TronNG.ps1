@@ -1,3 +1,6 @@
+#Requires -RunAsAdministrator
+#Requires -Version 5
+
 Start-Transcript -Path ~\TronNG.log -Append
 Write-Output "Start of TronNG - $(Get-Date)"
 
