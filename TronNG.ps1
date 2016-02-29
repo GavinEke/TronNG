@@ -1,5 +1,20 @@
-#Requires -RunAsAdministrator
+﻿#Requires -RunAsAdministrator
 #Requires -Version 5
+
+<#PSScriptInfo
+    .DESCRIPTION 
+    Performs a collection of admin tasks (Update, Virus Scan, Clean-up, Repair & Defrag) that might speed-up a computers performance. Windows 10 Only.
+    .VERSION 
+    2.1.0.0
+    .GUID 
+    35eb535b-7e54-4412-a58b-8a0c588c0b30
+    .AUTHOR 
+    Gavin Eke @GavinEke
+    .TAGS 
+    TronNG
+    .RELEASENOTES
+    https://github.com/GavinEke/TronNG
+#>
 
 Start-Transcript -Path ~\TronNG.log -Append
 Write-Output "Start of TronNG - $(Get-Date)"
