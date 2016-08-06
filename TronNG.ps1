@@ -26,7 +26,7 @@ If ([Environment]::OSVersion.Version.Major -eq 10) { #Prerequisite Check
     # Step 0 - Create Checkpoint
     If(!($args.Contains("-SkipStep0"))) {
         Write-Verbose "Step 0 - Create Checkpoint" | Tee-Object -FilePath $LogFile -Append
-        Checkpoint-Computer -Description "TronNG"
+        Checkpoint-Computer -Description "TronNG" -ErrorAction SilentlyContinue
     }
 
     # Step 1 - Update
