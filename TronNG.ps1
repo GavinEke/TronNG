@@ -32,7 +32,7 @@ If ([Environment]::OSVersion.Version.Major -eq 10) { #Prerequisite Check
     # Step 1 - Update
     If(!($args.Contains("-SkipStep1"))) {
         Write-Verbose "Step 1 - Update" | Tee-Object -FilePath $LogFile -Append
-        wuauclt.exe /detectnow /updatenow
+        (New-Object -ComObject Microsoft.Update.AutoUpdate).DetectNow()
     }
 
     # Step 2 - Virus Scan
