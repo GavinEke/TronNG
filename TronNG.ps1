@@ -3,7 +3,7 @@
 
 <#PSScriptInfo
 
-.VERSION 3.1.0
+.VERSION 3.1.1
 
 .GUID 35eb535b-7e54-4412-a58b-8a0c588c0b30
 
@@ -38,8 +38,8 @@ $VerbosePreference = "Continue"
 $LogFile = "$env:LOCALAPPDATA\TronNG\TronNG.log"
 
 If (!(Test-Path -Path $LogFile)) {
-	New-Item -Path $($LogFile | Split-Path -Parent) -ItemType Directory
-	New-Item -Path $($LogFile | Split-Path -Parent) -Name $($LogFile | Split-Path -Leaf) -ItemType File
+	New-Item -Path $($LogFile | Split-Path -Parent) -ItemType Directory -ErrorAction SilentlyContinue
+	New-Item -Path $($LogFile | Split-Path -Parent) -Name $($LogFile | Split-Path -Leaf) -ItemType File -ErrorAction SilentlyContinue
 	Write-Output "TronNG Log" | Out-File -FilePath $LogFile
 }
 Write-Output "Start of TronNG - $(Get-Date)" | Tee-Object -FilePath $LogFile -Append
