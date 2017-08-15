@@ -48,26 +48,26 @@ If ([Environment]::OSVersion.Version.Major -eq 10) {
 	#Prerequisite Check
 	# Step 0 - Create Checkpoint
 	If (!($args.Contains("-SkipStep0"))) {
-		Write-Verbose "Step 0 - Create Checkpoint" | Tee-Object -FilePath $LogFile -Append
+		Write-Output -InputObject "Step 0 - Create Checkpoint" | Tee-Object -FilePath $LogFile -Append
 		Checkpoint-Computer -Description "TronNG" -ErrorAction SilentlyContinue
 	}
 	
 	# Step 1 - Update
 	If (!($args.Contains("-SkipStep1"))) {
-		Write-Verbose "Step 1 - Update" | Tee-Object -FilePath $LogFile -Append
+		Write-Output -InputObject "Step 1 - Update" | Tee-Object -FilePath $LogFile -Append
 		(New-Object -ComObject Microsoft.Update.AutoUpdate).DetectNow()
 	}
 	
 	# Step 2 - Virus Scan
 	If (!($args.Contains("-SkipStep2"))) {
-		Write-Verbose "Step 2 - Virus Scan" | Tee-Object -FilePath $LogFile -Append
+		Write-Output -InputObject "Step 2 - Virus Scan" | Tee-Object -FilePath $LogFile -Append
 		Update-MpSignature -ErrorAction SilentlyContinue
 		Start-MpScan -ErrorAction SilentlyContinue
 	}
 	
 	# Step 3 - Clean-up
 	If (!($args.Contains("-SkipStep3"))) {
-		Write-Verbose "Step 3 - Clean-up" | Tee-Object -FilePath $LogFile -Append
+		Write-Output -InputObject "Step 3 - Clean-up" | Tee-Object -FilePath $LogFile -Append
 		Remove-Item $env:temp\* -Recurse -ErrorAction SilentlyContinue | Tee-Object -FilePath $LogFile -Append
 		Remove-Item $env:tmp\* -Recurse -ErrorAction SilentlyContinue | Tee-Object -FilePath $LogFile -Append
 		Clear-RecycleBin -Confirm:$False
@@ -75,13 +75,13 @@ If ([Environment]::OSVersion.Version.Major -eq 10) {
 	
 	# Step 4 - Repair
 	If (!($args.Contains("-SkipStep4"))) {
-		Write-Verbose "Step 4 - Repair" | Tee-Object -FilePath $LogFile -Append
+		Write-Output -InputObject "Step 4 - Repair" | Tee-Object -FilePath $LogFile -Append
 		Repair-Volume -DriveLetter C –Scan
 	}
 	
 	# Step 5 - Defrag
 	If (!($args.Contains("-SkipStep5"))) {
-		Write-Verbose "Step 5 - Defrag" | Tee-Object -FilePath $LogFile -Append
+		Write-Output -InputObject "Step 5 - Defrag" | Tee-Object -FilePath $LogFile -Append
 		$IsSSD = Get-Disk | Where-Object Model -match 'ssd'
 		If (!($IsSSD)) {
 			#SSD Check
@@ -91,7 +91,7 @@ If ([Environment]::OSVersion.Version.Major -eq 10) {
 	
 	# Step 6 - Drive Health Check
 	If (!($args.Contains("-SkipStep6"))) {
-		Write-Verbose "Step 6 - Drive Health Check" | Tee-Object -FilePath $LogFile -Append
+		Write-Output -InputObject "Step 6 - Drive Health Check" | Tee-Object -FilePath $LogFile -Append
 		If ((Get-Disk).HealthStatus -ne 'Healthy') {
 			#Failing Drive Check
 			Write-Output "A hard drive in this computer might be failing, it is suggested you investigate all connected hard drives." | Tee-Object -FilePath $LogFile -Append
